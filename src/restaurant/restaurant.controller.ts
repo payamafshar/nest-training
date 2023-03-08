@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { CreateReservDto } from './dtos/createReservDto';
 import createRestaurantDto from './dtos/createRestaurantDTO';
 import { CreateTableDto } from './dtos/createTableDto';
 import { RestaurantService } from './restaurant.service';
@@ -32,5 +33,13 @@ export class RestaurantController {
 
 
         return this.resaurantService.checkAvailbility(query)
+    }
+
+
+    @Post('/reserv')
+
+    reservation( @Body() createReservDto:CreateReservDto, @Query() query:{day:string}) {
+
+        return this.resaurantService.makeReservation(createReservDto,query)
     }
 }
